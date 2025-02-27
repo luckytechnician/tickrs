@@ -143,6 +143,7 @@ pub struct CompanyPrice {
     pub long_name: Option<String>,
     pub regular_market_price: CompanyMarketPrice,
     pub regular_market_previous_close: CompanyMarketPrice,
+    pub pre_market_price: OptionalCompanyMarketPrice,
     pub post_market_price: OptionalCompanyMarketPrice,
     pub regular_market_volume: OptionalCompanyMarketPrice,
     pub currency: Option<String>,

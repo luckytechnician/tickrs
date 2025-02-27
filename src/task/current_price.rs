@@ -37,11 +37,13 @@ impl AsyncTask for CurrentPrice {
                 if let Ok(response) = crate::CLIENT.get_company_data(symbol, crumb).await {
                     let regular_price = response.price.regular_market_price.price;
 
-                    let post_price = response.price.post_market_price.price;
+                    // If pre-market price is available, use it as the alternate price
+                    let alternate_price = response.price.pre_market_price.price
+                        .or(response.price.post_market_price.price);
 
                     let volume = response.price.regular_market_volume.fmt.unwrap_or_default();
 
-                    return Some((regular_price, post_price, volume));
+                    return Some((regular_price, alternate_price, volume));
                 }
             }
 
